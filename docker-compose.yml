@@ -1,0 +1,15 @@
+services:
+  telegraph:
+    image: ghcr.io/stockyard-dev/stockyard-telegraph:latest
+    ports:
+      - "8850:8850"
+    environment:
+      - PORT=${STOCKYARD_PORT:-8850}
+      - DATA_DIR=${STOCKYARD_DATA_DIR:-/data}
+      - TELEGRAPH_LICENSE_KEY=${STOCKYARD_TELEGRAPH_LICENSE_KEY:-}
+    volumes:
+      - telegraph-data:/data
+    restart: unless-stopped
+volumes:
+  telegraph-data:
+    driver: local
